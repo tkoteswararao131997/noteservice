@@ -24,6 +24,7 @@ import com.bridgelabz.noteservice.Entity.NoteEntity;
 import com.bridgelabz.noteservice.Entity.UserEntity;
 import com.bridgelabz.noteservice.Exception.CustomException;
 import com.bridgelabz.noteservice.Repository.NoteRepository;
+import com.bridgelabz.noteservice.Repository.UserRepository;
 import com.bridgelabz.noteservice.Utility.JwtOperations;
 import com.bridgelabz.noteservice.service.NoteServiceInf;
 
@@ -42,6 +43,8 @@ public class NoteServiceImpl implements NoteServiceInf {
 //	private UserEntity userentity;
 	@Autowired
 	private NoteEntity noteentity;
+	@Autowired
+	private UserRepository userrepo;
 //	@Autowired
 //	private UserRepository userrepo;
 //	@Autowired
@@ -50,7 +53,7 @@ public class NoteServiceImpl implements NoteServiceInf {
 	{
 		//System.out.println(id);
 		UserEntity userentity=restTemplate.getForEntity("http://localhost:8090/getuser/"+token,UserEntity.class).getBody();
-		System.out.println(userentity+"--------------");
+		System.out.println(userentity);
 		return userentity;
 	}
 	@Override
@@ -70,7 +73,8 @@ public class NoteServiceImpl implements NoteServiceInf {
 		noteentity.setPinned(false);
 		noteentity.setTrashed(false);
 		userentity.getNotes().add(noteentity);
-		restTemplate.exchange("http://localhost:8090/saveuser/"+userentity, HttpMethod.PUT,null, String.class);
+		//restTemplate.exchange("http://localhost:8090/saveuser/"+userentity, HttpMethod.PUT,null, String.class);
+		userrepo.save(userentity);
 		List<NoteEntity> notes=userentity.getNotes();
 		for(NoteEntity note : notes)
 		{

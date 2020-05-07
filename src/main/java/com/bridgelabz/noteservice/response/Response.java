@@ -1,4 +1,4 @@
-package com.bridgelabz.noteservice.Response;
+package com.bridgelabz.noteservice.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +10,11 @@ public class Response {
 	String message;
 	int status;
 	Object data;
-	String statusMsg;
-		public Response(String message,Object user,int status,String statusMsg) 
+		public Response(String message,Object user,int status) 
 		{
 		this.message=message;
 		this.status=status;
 		this.data=user;
-		this.statusMsg=statusMsg;
 		}
 	
 	

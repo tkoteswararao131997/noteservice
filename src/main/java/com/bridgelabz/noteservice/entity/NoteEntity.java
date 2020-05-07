@@ -1,4 +1,4 @@
-package com.bridgelabz.noteservice.Entity;
+package com.bridgelabz.noteservice.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,32 +22,22 @@ import lombok.Data;
 @Entity
 @Table(name="notes")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,scope = NoteEntity.class)
-public class NoteEntity implements Comparable<NoteEntity>{
+public class NoteEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long noteId;
+	private Long noteId;
 	@NotBlank(message = "title must not be blank")
 	private String title;
+	private Long userId;
 	private String description;
-	private String color;
-	private boolean isPinned;
-	private String reminde;
-	private boolean isArchieve;
+	private String color="white";
+	private boolean isPinned=false;
+	private String reminde=null;
+	private boolean isArchieve=false;
 	private LocalDateTime createDate;
-	private LocalDateTime UpdateDate;
-	private boolean isTrashed;
-	
+	private LocalDateTime UpdateDate=null;
+	private boolean isTrashed=false;
 	@ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.LAZY)
 	private List<LabelEntity> labels;
-	
-//	@ManyToMany(cascade = {CascadeType.MERGE},fetch = FetchType.LAZY)
-//	private List<UserEntity> collaborators;
-
-	@Override
-	public int compareTo(NoteEntity arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 
 }

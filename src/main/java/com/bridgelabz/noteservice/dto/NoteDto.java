@@ -1,4 +1,4 @@
-package com.bridgelabz.noteservice.Dto;
+package com.bridgelabz.noteservice.dto;
 
 import lombok.Data;
 

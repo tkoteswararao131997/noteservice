@@ -1,11 +1,11 @@
-package com.bridgelabz.noteservice.Configuration;
+package com.bridgelabz.noteservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.bridgelabz.noteservice.Entity.NoteEntity;
-import com.bridgelabz.noteservice.Utility.JwtOperations;
+import com.bridgelabz.noteservice.entity.NoteEntity;
+import com.bridgelabz.noteservice.utility.JwtOperations;
 @Component
 public class AppConfig {
 	@Bean

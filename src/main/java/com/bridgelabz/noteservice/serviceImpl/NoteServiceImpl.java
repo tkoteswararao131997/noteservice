@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
@@ -27,12 +28,12 @@ public class NoteServiceImpl implements NoteServiceInf {
 	private NoteRepository noterepo;
 	@Autowired
 	private RestTemplate restTemplate;
-	@Autowired
-	private JwtOperations jwt;
+	private JwtOperations jwt=new JwtOperations();
 	private NoteEntity noteentity=new NoteEntity();
-	public void isUserExists(Long id)
+	public Response isUserExists(Long id)
 	{
-		restTemplate.getForEntity("http://localhost:8090/user/getuserbyid/"+id,Void.class).getBody();
+		Response result=restTemplate.getForEntity("http://localhost:8090/user/getuserbyid/"+id,Response.class).getBody();
+		return result;
 	}
 	@Override
 	public NoteEntity addNote(NoteDto notedto, String token) {
